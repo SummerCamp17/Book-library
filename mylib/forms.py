@@ -43,11 +43,7 @@ class RegistrationForm(forms.Form):
     def clean_username(self):
         username = self.cleaned_data['username']
         if not re.search(r'^\w+$', username):
-            raise forms.ValidationError('Username can only contain
-            alphanumeric
-            characters and the
-            underscore.
-            ')
+            raise forms.ValidationError('Username can only contain alphanumeric characters and the underscore.')
         try:
             User.objects.get(username=username)
         except ObjectDoesNotExist:

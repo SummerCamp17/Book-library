@@ -118,6 +118,8 @@
 
                     {% else %}
                     <li><a href="{% url 'login' %}?next={{request.path}}">Login</a></li>
+                     <li><a href="{% url 'sign_in' %}?next={{request.path}}">Sign_in</a></li>
+
                     {% endif %}
 
 
@@ -284,7 +286,7 @@
                     <span>
                         <img src={% static "mylib/img/service/1.jpg" %}   class="img-responsive img-circle center-block" style="width:12em;height:12em" alt="" align="middle">
                     </span>
-                    <h4 class="service-heading">Join The Library</h4>
+                    <h4 class="service-heading"><a href="{% url 'sign_in' %}">Join The Library</a></h4>
                     <p class="text-muted">Anyone can join our library and get access to quality resourses such as books and e-books.</p>
                 </div>
                 <div class="col-md-4">
