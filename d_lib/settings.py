@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'mylib',
+    'bootstrap_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,6 +74,8 @@ TEMPLATES = [
 
 
 WSGI_APPLICATION = 'd_lib.wsgi.application'
+
+BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
 
 
 # Database
