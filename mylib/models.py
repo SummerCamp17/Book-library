@@ -36,11 +36,12 @@ class Book(models.Model):
     cover = models.ImageField(upload_to=user_directory_path, null=True, blank=True)
     no_instance = models.IntegerField(null=True, blank=True, default=0)
 
-
     def __str__(self):
         return self.title
+
     def get_absolute_url(self):
         return reverse('book_detail',args=[str(self.id)])
+
     def image_url(self):
         if self.cover and hasattr(self.cover,'url'):
             return self.cover.url
@@ -60,20 +61,17 @@ class IssueRequest(models.Model):
     status = models.CharField(max_length=1, choices=ISSUE_STATUS,default='n',null=True,blank=True)
 
 
-
 class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     notice = models.CharField(max_length=200)
 
 
-
-
 class BookInstance(models.Model):
-    id=models.UUIDField(primary_key=True,default=uuid.uuid4)
-    book=models.ForeignKey('Book',on_delete=models.SET_NULL,null=True)
-    imprint=models.CharField(max_length=200,blank=True)
-    due_back=models.DateField(null=True,blank=True)
-    borrower=models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True)
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4)
+    book = models.ForeignKey('Book',on_delete=models.SET_NULL,null=True)
+    imprint = models.CharField(max_length=200,blank=True)
+    due_back = models.DateField(null=True,blank=True)
+    borrower = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True)
 
     RETURN_STATUS = (
         ('r', 'Return'),
@@ -93,9 +91,9 @@ class BookInstance(models.Model):
 
     @property
     def is_overdue(self):
-       if date.today()>self.due_back:
-            return  True
-       return False
+        if date.today() > self.due_back:
+            return True
+        return False
 
     class Meta:
         ordering=["due_back"]

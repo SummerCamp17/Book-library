@@ -6,7 +6,6 @@ from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.urls import reverse_lazy
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
 
 
 # Create your views here.
@@ -57,7 +56,6 @@ def req_issue(request,pk):
         else:
             form=RequestIssueForm()
 
-
     return render(request, 'request_issue.html', context={'form':form,'ct':ct,'book':book,'k':k})
 
 
@@ -87,7 +85,6 @@ def return_book(request,pk):
     return HttpResponseRedirect(reverse('my_books'))
 
 
-
 @permission_required('mylib.manage_books')
 def all_issued_book(request):
     all_issued=BookInstance.objects.filter(status__exact='o').order_by('due_back','borrower')
@@ -99,10 +96,12 @@ def request_list(request):
     request_list=IssueRequest.objects.filter(status__exact='n')
     return  render(request,'request_list.html',context={'list':request_list})
 
+
 @permission_required('mylib.manage_books')
 def return_claims(request):
     claim_list=BookInstance.objects.filter(status__exact='o').filter(rtn_status__exact='r')
     return  render(request,'claim_list.html',context={'list':claim_list})
+
 
 @login_required
 @permission_required('mylib.manage_books')
