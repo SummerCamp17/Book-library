@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% block title %}
+Lib-books
+{% endblock %}
+
+
+{% block content %}
+<section id="portfolio" class="bg-light-gray" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center bk">
+                    <h2 class="section-heading">Book List</h2>
+                    <h3 class="section-subheading text-muted bk1 ">PLUNGE INTO THE WONDERFUL WORLD OF READING
+                    </h3>
+                </div>
+            </div>
+        </div>
+</section>
+
+
+
+<section id="pricing-table">
+            <div class="container">
+                <div class="row">
+                    <div class="pricing">
+                        {% if all_books %}
+                        {% for book in all_books %}
+
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            <div class="pricing-table" >
+                                <div class="pricing-header" >
+
+                                    <a href="{% url 'book_detail' book.id %}" class="btn btn-custom"><img src="{{ book.image_url }}"  class="img-responsive" alt="" style="width:10em;height:14em;float:left"></a>
+                                </div>
+
+                                <div class="pricing-list">
+                                    <ul>
+                                        <li><span><a href="{% url 'book_detail' book.id %}"><b>{{book.title}}</b></a></span></li>
+                                        <li>By <span>{{book.author}}</span></li>
+                                        <li><a href="{% url 'request_issue' book.id %}">Request issue now</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else  %}
+                        <p>There is no book in library</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+</section>
+
+
+
+
+{% endblock content %}
+
+

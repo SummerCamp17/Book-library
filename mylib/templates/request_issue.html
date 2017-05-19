@@ -1,0 +1,38 @@
+
+{% extends "index.html" %}
+{% block title %}
+my_books
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container box">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>request to issue:{{book.title}}</h1>
+            <div class="row" style="padding: 0 35px;" >
+                <h4>Available Instances:{{ct}}</h4>
+                {% if k %}
+                <b>{{ form }}</b>
+                {% else %}
+                {% if ct %}
+                 <form action="" method="post">
+                     {% csrf_token %}
+                     <table>
+                         {{form}}
+                     </table>
+                     <input type="submit" value="Submit" />
+                 </form>
+                {% else %}
+                <p>This book is currently not available</p>
+                {% endif %}
+                {% endif %}
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

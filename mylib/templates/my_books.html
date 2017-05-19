@@ -1,0 +1,138 @@
+{% extends "index.html" %}
+{% block title %}
+my_books
+{% endblock %}
+
+{% load staticfiles %}
+{% block content %}
+
+<div class="container box ">
+    <div class="row">
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">
+                <strong>Borrowed books</strong>
+            </h2 >
+            <a href="{% url 'books' %}"><p class="text-center"> Explore Books--See the whole Book list</p></a>
+            <hr>
+              {% if borrowed %}
+            <table class="table table-striped">
+                <thead class="thead-inverse">
+                <tr>
+                    <th><img src="{% static 'mylib/img/team/lib.jpg' %}" class="img-responsive img-circle center-block" alt="" align="middle" style="width:6em;height:6em;float:left"></th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Return date</th>
+                    <th class="text-center">Book UUID</th>
+                    <th>Return now</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for book in borrowed %}
+                <tr>
+                    <th scope="row"><a class="btn btn-custom"><img src="{{ book.book.image_url }}"  class="img-responsive" alt="" style="width:1em;height:1.5em;float:left"></a></th>
+                    <td>{{book.book.title}}</td>
+                    <td>{{book.book.author}}</td>
+                    {% if book.is_overdue %}
+                    <td class="text-danger text-center">{{book.due_back}}</td>
+                    {% else %}
+                    <td class="text-center">{{book.due_back}}</td>
+                    {% endif %}
+                    <td class="text-center">{{book.id}}</td>
+                    <td><a  href="{% url 'return_book' book.pk %}" class="btn btn-custom"><img src="{% static 'mylib/img/return.png' %}"  class="img-responsive" alt="" style="width:2em;height:1em;"></a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {% else  %}
+            <p class="text-center">There is no book borrowed.Explore Books and make issue request</p>
+            {% endif %}
+
+        </div>
+
+         {% if rtn %}
+        </div>
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">
+                <strong>Books Requested to be returned</strong>
+            </h2 >
+            <a href="{% url 'books' %}"><p class="text-center"> Explore Books--See the whole Book list</p></a>
+            <hr>
+
+            <table class="table table-striped">
+                <thead class="thead-inverse">
+                <tr>
+                    <th><img src="{% static 'mylib/img/team/lib.jpg' %}" class="img-responsive img-circle center-block" alt="" align="middle" style="width:6em;height:6em;float:left"></th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Return date</th>
+                    <th class="text-center">Book UUID</th>
+                    <th>Take back</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for book in rtn %}
+                <tr>
+                    <th scope="row"><a class="btn btn-custom"><img src="{{ book.book.image_url }}"  class="img-responsive" alt="" style="width:1em;height:1.5em;float:left"></a></th>
+                    <td>{{book.book.title}}</td>
+                    <td>{{book.book.author}}</td>
+                    {% if book.is_overdue %}
+                    <td class="text-danger text-center">{{book.due_back}}</td>
+                    {% else %}
+                    <td class="text-center">{{book.due_back}}</td>
+                    {% endif %}
+                    <td class="text-center">{{book.id}}</td>
+                    <td><a  href="{% url 'return_book' book.pk %}" class="btn btn-custom"><img src="{% static 'mylib/img/return.png' %}"  class="img-responsive" alt="" style="width:2em;height:1em;"></a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+        {% if issue %}
+         <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">
+                <strong>Books Requested to be Issued</strong>
+            </h2 >
+            <a href="{% url 'books' %}"><p class="text-center"> Explore Books--See the whole Book list</p></a>
+            <hr>
+
+            <table class="table table-striped">
+                <thead class="thead-inverse">
+                <tr>
+                    <th><img src="{% static 'mylib/img/team/lib.jpg' %}" class="img-responsive img-circle center-block" alt="" align="middle" style="width:6em;height:6em;float:left"></th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Proposed return date</th>
+                    <th>Take back</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for book in issue %}
+                <tr>
+                    <th scope="row"><a class="btn btn-custom"><img src="{{ book.book.image_url }}"  class="img-responsive" alt="" style="width:1em;height:1.5em;float:left"></a></th>
+                    <td>{{book.book.title}}</td>
+                    <td>{{book.book.author}}</td>
+                    <td>{{book.return_date}}</td>
+                    <td><a class="btn btn-custom"><img src="{% static 'mylib/img/return.png' %}"  class="img-responsive" alt="" style="width:2em;height:1em;"></a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+
+
+
+{% endblock content %}

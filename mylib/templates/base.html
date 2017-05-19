@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+<title>Central Library</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=divice-width,initial-scale=1">
+<link rel="stylesheet" href="{% static 'mylib/css/bootstrap.min.css' %}">
+<script src="{% static 'mylib/js/bootstrap.min.js' %}"></script>
+
+<style>
+    .bg-1
+    {
+
+        background-image:url("{% static "mylib/assets/img/lib.png" %}");
+        background-size:85% 100%;
+        background-position: center;
+        color:greenyellow;
+        height:400px;
+    }
+    .bg-2
+    {
+        background-color: #474e5d  ;
+        color:papayawhip;
+    }
+    .bg-3
+    {
+        background-color: #1abc9c;
+        color: white;
+    }
+    .container-fluid
+    {
+    padding-top: 70px;
+    padding-bottom: 40px;
+    }
+    .bg-4 {
+    background-color: #2f2f2f;
+    color: #ffffff;
+}
+</style>
+</head>
+<body>
+<div class="text-center container-fluid bg-1">
+    <h1>WELCOME TO CENTRAL LIBRARY</h1>
+
+</div>
+
+<div class="container-fluid text-center bg-3">
+    <h3>PLUNGE INTO THE WONDERFUL WORLD OF READING</h3>
+    <br>
+     <div class="row">
+        <div class="col-sm-3 "><h4><a href="{% url 'books' %}" class="btn btn-default btn-lg">Books</a></h4></div>
+         
+        <div class="col-sm-3"><h4><a href="{% url 'authors' %}"  class="btn btn-default btn-lg">Authors</a></h4></div>
+         <div class="col-sm-3"><h4><a class="btn btn-default btn-lg">Blogs</a></h4></div>
+         <div class="col-sm-3"><h4><a class="btn btn-default btn-lg">Contacts</a></h4></div>
+    </div>
+</div>
+{%block content %}
+
+
+{%endblock content%}
+    
+<div class="container-fluid bg-2 ">
+
+    <h3 class="text-center"></h3>
+    <p>
+
+
+    </p>
+</div>
+<footer class="container-fluid bg-4 text-center">
+
+  <p>All rights reserved @ central library</p>
+
+
+
+</footer>
+
+    
+ 
+</body>
+</html>
+
+I 
+
+
+ <ul>
+                        {% if user.is_authenticated %}
+                               {% for each in notice%}
+                                 <li>{{each.notice}}</li>
+                               {% endfor %}
+                        {% endif %}
+                    </ul>
+
+
+
+
+{% if 1 %}
+                               {% for each in notice%}
+                                 <li>{{each.notice}}</li>
+                                 <li class="divider"></li>
+                               {% endfor %}
+                             {% else %}
+                                 <li>Request Book issue for notifications</li>
+                             {% endif %}

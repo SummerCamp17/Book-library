@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Central Library {% endblock %}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'mylib/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'mylib/css/business-casual.css' %}" rel="stylesheet">
+  
+
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .bk{
+            color:lightblue;
+            
+        }
+        .bk1{
+            
+            color:darkgray
+        }
+        #mainNav{
+             background-color:light;
+        }
+        .main{
+              margin-top:80px;
+         }
+         .lc
+         {
+             text-transform:lowercase;
+             padding: 0 1em;
+         }
+         .lc:first-letter
+         {
+             text-transform:capitalise;
+         }
+
+        
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-inverse navbar-custom navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Central Library</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{% url 'index' %}">Home</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'my_books' %}">My Books</a></li>
+
+
+                     <li class="dropdown">
+                         <a class="btn btn-link dropdown-toggle" data-toggle="dropdown"type="button">Notifications<span class="caret"></span></a>
+                         <ul class="dropdown-menu notifications">
+                             {% for each in notice%}
+                                 <li class=" lc">{{each}}</li>
+                                 <li class="divider"></li>
+                             {% endfor %}
+                             <li><a href="{% url 'notifications' %}"><b >See all notifications</b></a></li>
+                         </ul>
+
+                     </li>
+
+                    {% else %}
+                    <li>
+                        <a href="{% url 'books' %}">Books</a>
+                    </li>
+                     <li>
+                        <a href="{% url 'authors' %}">Authors</a>
+                    </li>
+                     <li>
+                        <a href=#>Genre</a>
+                    </li>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <li><a href="#">@{{user.get_username}}</a></li>
+
+                    <li><a href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
+
+                    {% else %}
+                    <li><a href="{% url 'login' %}?next={{request.path}}">Login</a></li>
+                    {% endif %}
+
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="brand main">Central Library</div>
+    <div class="address-bar">3481 Montonne Place | Django joch, KN 90210 | 127.0.0.1:8000</div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand" href="index.html">Central Library</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'books' %}">Books</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'authors' %}">Authors</a>
+                    </li>
+                    <li>
+                        <a href=#>Genre</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+     <!-- Portfolio Grid Section -->
+
+    {% block content  %}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="box">
+                <div class= {% if perms.mylib.manage_books %}"col-lg-8 text-center"{% else %}"col-lg-12 text-center"{% endif %}>
+                    <div id="carousel-example-generic" class="carousel slide">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators hidden-xs">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img class="img-responsive img-full" src="{% static "mylib/img/slide-1.png" %}" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="img-responsive img-full" src="{% static "mylib/img/slide-2.png" %}" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="img-responsive img-full" src="{% static "mylib/img/slide-3.jpg" %}" alt="">
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="icon-prev"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="icon-next"></span>
+                        </a>
+                    </div>
+                    <h2 class="brand-before">
+                        <small>Welcome to</small>
+                    </h2>
+                    <h1 class="brand-name">Central Library</h1>
+                    <hr class="tagline-divider">
+                    <h2>
+                        <small>
+                            <strong>PLUNGE INTO THE WONDERFUL WORLD OF READING</strong>
+                        </small>
+                    </h2>
+                </div>
+                {% if user.is_authenticated %}
+                {% if perms.mylib.manage_books %}
+                <div class="col-lg-4 text-center">
+                  <div class="row">
+                     <div class="team-member text-center">
+                        <img src="{% static 'mylib/img/team/lib.jpg' %}" class="img-responsive img-circle center-block" alt="" align="middle" style="width:8em;height:8em">
+                        <h4>{{user.get_username}}</h4>
+                        <p class="text-muted">Librarian</p>
+                     </div>
+                  </div>
+
+                  <div>
+                     <ul class="list-group">
+                         <li class="list-group-item active"><a class="list-group-item" href="{% url 'index' %}">Home</a></li>
+                         <li class="list-group-item" ><a class="list-group-item" href="{% url 'book_create' %}">Add New Book</a></li>
+                         <li class="list-group-item"><a class="list-group-item" href="{% url 'issued_books' %}">All Issued Books</a></li>
+                         <li class="list-group-item"><a class="list-group-item list-group-item-action" href="{% url 'request_list' %}">Issue Requests</a></li>
+                         <li class="list-group-item"><a class="list-group-item" href="{% url 'return_claims' %}">Return Claims</a></li>
+
+                     </ul>
+                  </div>
+                </div>
+                {% endif %}
+                {% endif %}
+
+            </div>
+        </div>
+       </div>
+    <!-- /.container -->
+
+        <section id="portfolio" class="bg-light-gray" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center bk">
+                    <h2 class="section-heading ">Recently Added Books</h2>
+                    <a href="{% url 'books' %}"><p class="text-center bk1"> <b>Explore Books--See the whole Book list</b></p></a>
+                </div>
+            </div>
+            <div class="row bk">
+                {% for book in added_books %}
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="{% url 'book_detail' book.id %}" class="portfolio-link" data-toggle="modal"><img src="{{ book.image_url }}"  class="img-responsive" alt="" style="width:21em;height:32em"></a>
+                    <div class="portfolio-caption bk">
+                        <h4><a href="{% url 'book_detail' book.id %}" style="color:lightblue">{{book.title}}</a></h4>
+                        <p class="text-muted bk1">By {{book.author}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        </section>
+
+    {% endblock %}
+    <hr>
+    <section id="services">
+        <div class="container box ">
+            <div class="row ">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Services</h2>
+
+                    <h3 class="section-subheading text-muted"></h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span>
+                        <img src={% static "mylib/img/service/1.jpg" %}   class="img-responsive img-circle center-block" style="width:12em;height:12em" alt="" align="middle">
+                    </span>
+                    <h4 class="service-heading">Join The Library</h4>
+                    <p class="text-muted">Anyone can join our library and get access to quality resourses such as books and e-books.</p>
+                </div>
+                <div class="col-md-4">
+                    <span>
+                        <img src={% static "mylib/img/service/2.jpg" %}   class="img-responsive img-circle center-block" style="width:12em;height:12em" alt="" align="middle">
+                    </span>
+                    <h4 class="service-heading">Donate a Book</h4>
+                    <p class="text-muted">Help us to expand our book catalog for benefit of community.Your help would be appreciated. </p>
+                </div>
+                <div class="col-md-4">
+                    <span>
+                        <img src={% static "mylib/img/service/3.png" %}   class="img-responsive img-circle  center-block" style="width:12em;height:12em" alt="" align="middle">
+                    </span>
+                    <h4 class="service-heading">Contact Us</h4>
+                    <p class="text-muted">Email us for any query regarding the library and to give feedback.Your suggestions would be valuable.</p>
+                </div>
+
+            </div>
+        </div>
+        </section>
+
+
+        <!-- Team Section -->
+    <section id="team" class="bg-light-gray">
+        <div class="container box">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Our Amazing Team</h2>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="team-member text-center">
+                        <img src={% static "mylib/img/team/1.jpg" %}   class="img-responsive img-circle center-block" style="width:12em;height:12em" alt="" align="middle">
+                        <h4>Ashish Kumar</h4>
+                        <p class="text-muted">Lead Developer</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <div class="team-member">
+                        <img src="{% static "mylib/img/team/2.png" %}" class="img-responsive img-circle center-block"  style="width:12em;height:12em" alt="">
+                        <h4>Aniket Pandey</h4>
+                        <p class="text-muted">Lead Developer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <p class="large text-muted">     </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!--footer-->
+
+    <div class="col-lg-12 text-center " style="background:white;height:40px">
+        <p class="text-muted">Copyright &copy; TheDjangoBoys</p>
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="{% static 'mylib/js/jquery.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'mylib/js/bootstrap.min.js' %}"></script>
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
+
+</body>
+
+</html>

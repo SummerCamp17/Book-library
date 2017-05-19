@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+{% block title %}
+my_books
+{% endblock %}
+
+
+{% load staticfiles %}
+
+
+{% block content %}
+
+
+<div class="container box ">
+    <div class="row">
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">
+                <strong>Issued books</strong>
+            </h2 >
+            <a href="{% url 'request_list' %}"><p class="text-center"> Issue Now--See the Issue Request list</p></a>
+            <hr>
+              {% if issued %}
+            <table class="table table-striped">
+                <thead class="thead-inverse">
+                <tr>
+                    <th><img src="{% static 'mylib/img/team/lib.jpg' %}" class="img-responsive img-circle center-block" alt="" align="middle" style="width:6em;height:6em;float:left"></th>
+                    <th class="text-center">Book</th>
+                    <th class="text-center">Borrower</th>
+                    <th class="text-center">Book UUID</th>
+                    <th class="text-center">Return date</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for book in issued %}
+                <tr>
+                    <th scope="row"><a class="btn btn-custom"><img src="{{ book.book.image_url }}"  class="img-responsive" alt="" style="width:1em;height:1.5em;float:left"></a></th>
+                    <td class="text-center">{{book.book.title}}</td>
+                    <td class="text-center">{{book.borrower}}</td>
+                    <td class="text-center">{{book.id}}</td>
+                     {% if book.is_overdue %}
+                    <td class="text-danger text-center">{{book.due_back}}</td>
+                    {% else %}
+                    <td class="text-center">{{book.due_back}}</td>
+                    {% endif %}
+
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+            {% else  %}
+            <p class="text-center">There is no book issued.see issue requests to issue Books</p>
+            {% endif %}
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock content %}
