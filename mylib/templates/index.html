@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}Central Library {% endblock %}</title>
+    <title>{% block title %}Awesome Library {% endblock %}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'mylib/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -71,7 +71,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Central Library</a>
+                <a class="navbar-brand page-scroll" href="#page-top">Awesome Library</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -118,7 +118,7 @@
 
                     {% else %}
                     <li><a href="{% url 'login' %}?next={{request.path}}">Login</a></li>
-                     <li><a href="{% url 'sign_in' %}?next={{request.path}}">Sign_in</a></li>
+                     <li><a href="{% url 'sign_in' %}?next={{request.path}}">Sign-in</a></li>
 
                     {% endif %}
 
