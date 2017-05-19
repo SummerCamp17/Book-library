@@ -3,7 +3,7 @@
 
 A fully functional and responsive library web-app based on Django and Bootstrap. The app was created by [Ashish](https://github.com/aasis21) and [Aniket](https://github.com/lordaniket06) for practice purposes and to get acquainted with Django. Don't get surprised if you find funny remarks here and there :smiley:.
 
-## as
+## Webpage
 Live project is available [here](https://aasis21.pythonanywhere.com).
 
 ## Local Setup
