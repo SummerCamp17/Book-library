@@ -9,6 +9,7 @@ urlpatterns =[
 
     url(r'^books/(?P<pk>[0-9a-f-]+)/request_issue/confirm/$',views.IssueRequestUpdate.as_view(),name='confirm_issue'),
     url(r'^authors/$',views.authors,name='authors'),
+    url(r'^genre/$',views.genre,name='genre'),
     url(r'^mybooks/$',views.loaned_book_by_user,name='my_books'),
     url(r'^mybooks/(?P<pk>[0-9a-f-]+)/return/$',views.return_book,name='return_book'),
     url(r'^issued/$',views.all_issued_book,name='issued_books'),

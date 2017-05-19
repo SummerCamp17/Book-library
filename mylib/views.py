@@ -64,12 +64,20 @@ def authors(request):
     all_authors = Author.objects.all()
     return render(request, 'authors.html', context={'all_authors': all_authors})
 
+
+@login_required
+def genre(request):
+    genre = Genre.objects.all()
+    return render(request, 'genre.html', context={'genre': genre})
+
+
 @login_required
 def loaned_book_by_user(request):
     all_loaned=BookInstance.objects.filter(borrower=request.user).filter(status__exact='o').exclude(rtn_status__exact='r').order_by('due_back')
     issue=IssueRequest.objects.filter(user=request.user).filter(status__exact='n')
     rtn=BookInstance.objects.filter(borrower=request.user).filter(status__exact='o').filter(rtn_status__exact='r').order_by('due_back')
     return  render(request,'my_books.html',context={'borrowed':all_loaned,'rtn':rtn,'issue':issue})
+
 
 @login_required
 def return_book(request,pk):
