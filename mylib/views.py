@@ -32,7 +32,7 @@ def detail(request,pk):
     insA=BookInstance.objects.filter(book=book).filter(status__exact='a').count()
     return render(request, 'book_detail.html', context={'book': book,'insA':insA})
 
-from .forms import RequestIssueForm
+from .forms import RequestIssueForm,RegistrationForm
 
 @login_required
 def req_issue(request,pk):
@@ -148,4 +148,12 @@ class IssueRequestUpdate(UpdateView):
     success_url = reverse_lazy('request_list')
 
 
-
+def register_page(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(username=form.cleaned_data['username'],password=form.cleaned_data['password1'],email=form.cleaned_data['email'])
+            return HttpResponseRedirect('/')
+    form = RegistrationForm()
+    variables = RequestContext(request, {'form': form})
+    return render_to_response('registration/register.html',variables)

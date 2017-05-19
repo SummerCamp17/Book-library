@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+{% block title %}User Registration{% endblock %}
+{% block content %}
+
+
+<div class="container box">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Sign in</h1>
+            <div class="row" style="padding: 0 35px;" >
+                 <form action="" method="post">
+                     {% csrf_token %}
+                     <table>
+                         {{form}}
+                     </table>
+                     <input type="submit" value="Submit" />
+                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
