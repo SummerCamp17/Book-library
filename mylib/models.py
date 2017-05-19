@@ -10,30 +10,31 @@ from datetime import date
 
 # Create your models here.
 class Genre(models.Model):
-    name=models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+
 
 class Author(models.Model):
-    name=models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+
     def __str__(self):
         return self.name
+
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return os.path.join('pics', str(instance.id),filename)
-
-
+    return os.path.join('pics', str(instance.id), filename)
 
 
 class Book(models.Model):
-    title=models.CharField(max_length=200)
-    author=models.ForeignKey(Author,on_delete=models.SET_NULL,null=True)
-    description=models.TextField(max_length=1000,null=True,blank=True)
-    genre=models.ManyToManyField(Genre)
-    cover = models.ImageField(upload_to=user_directory_path,null=True,blank=True)
-    no_instance=models.IntegerField(null=True,blank=True,default=0)
+    title = models.CharField(max_length=200)
+    author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
+    description = models.TextField(max_length=1000, null=True, blank=True)
+    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
+    cover = models.ImageField(upload_to=user_directory_path, null=True, blank=True)
+    no_instance = models.IntegerField(null=True, blank=True, default=0)
 
 
     def __str__(self):
