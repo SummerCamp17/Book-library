@@ -32,8 +32,8 @@ my_books
                          <li class="list-group-item active lead"><a class="list-group-item" href="#"><b>{{book.title}}</b></a></li>
                          <li class="list-group-item" ><a class="list-group-item"><b>Author: {{book.author}}</b></a></li>
                          {% if user.is_authenticated %}
-                         <li class="list-group-item" ><a class="list-group-item" >Available Instances: {{insA}}</a></li>
-                         <li class="list-group-item" ><a class="list-group-item" >Total Instances: {{book.no_instance}}</a></li>
+                         <li class="list-group-item" ><a class="list-group-item" >Available Copies: {{insA}}</a></li>
+                         <li class="list-group-item" ><a class="list-group-item" >Total Copies: {{book.no_instance}}</a></li>
                          <li class="list-group-item"><a class="list-group-item" href="{% url 'request_issue' book.id %}">Request to issue</a></li>
                          {% else %}
                          <li class="list-group-item"><a class="list-group-item" href="{% url 'request_issue' book.id %}">Request to issue</a></li>

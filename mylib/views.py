@@ -124,7 +124,7 @@ def fake_claim(request,pk):
     Ins = BookInstance.objects.get(pk=pk)
     Ins.rtn_status=None
     Ins.save()
-    Notification.objects.create(user=Ins.borrower,notice="Your claim to return '%s' book has been found fake. BC " % Ins.book.title)
+    Notification.objects.create(user=Ins.borrower,notice="Your claim to return '%s' book has been found fake. " % Ins.book.title)
     return HttpResponseRedirect(reverse('return_claims'))
 
 

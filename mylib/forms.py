@@ -14,9 +14,9 @@ class RequestIssueForm(forms.Form):
     return_date=forms.DateField(help_text="max_issue_period = One month ||  fomat:MM/DD/YYYY ")
 
     def clean_return_date(self):
-        data= self.cleaned_data['return_date']
+        data = self.cleaned_data['return_date']
 
-        if data <datetime.date.today():
+        if data < datetime.date.today():
             raise ValidationError(_('Invalid Date'))
         if data > datetime.date.today() + datetime.timedelta(weeks=4):
             raise ValidationError(_('Invalid Date "Not within a month"'))
