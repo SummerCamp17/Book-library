@@ -253,7 +253,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center bk">
                     <h2 class="section-heading ">Recently Added Books</h2>
-                    <a href="{% url 'books' %}"><p class="text-center bk1"> <b>Explore Books--See the whole Book list</b></p></a>
+                    <a href="{% url 'books' %}"><p class="text-center bk1"> <b>Explore Books--See available books</b></p></a>
                 </div>
             </div>
             <div class="row bk">
@@ -276,33 +276,27 @@
         <div class="container box ">
             <div class="row ">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Services</h2>
+                    <h2 class="section-heading">Associate with our Library</h2>
 
                     <h3 class="section-subheading text-muted"></h3>
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <span>
                         <img src={% static "mylib/img/service/1.jpg" %}   class="img-responsive img-circle center-block" style="width:12em;height:12em" alt="" align="middle">
                     </span>
                     <h4 class="service-heading"><a href="{% url 'sign_in' %}">Join The Library</a></h4>
                     <p class="text-muted">Anyone can join our library and get access to quality resourses such as books and e-books.</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <span>
                         <img src={% static "mylib/img/service/2.jpg" %}   class="img-responsive img-circle center-block" style="width:12em;height:12em" alt="" align="middle">
                     </span>
-                    <h4 class="service-heading">Donate a Book</h4>
+                    <h4 class="service-heading"><a href="{% url 'sign_in' %}">Donate a Book</h4>
                     <p class="text-muted">Help us to expand our book catalog for benefit of community.Your help would be appreciated. </p>
                 </div>
-                <div class="col-md-4">
-                    <span>
-                        <img src={% static "mylib/img/service/3.png" %}   class="img-responsive img-circle  center-block" style="width:12em;height:12em" alt="" align="middle">
-                    </span>
-                    <h4 class="service-heading">Contact Us</h4>
-                    <p class="text-muted">Email us for any query regarding the library and to give feedback.Your suggestions would be valuable.</p>
-                </div>
+
 
             </div>
         </div>
@@ -314,7 +308,7 @@
         <div class="container box">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Our Amazing Team</h2>
+                    <h2 class="section-heading">Development Team</h2>
                 </div>
             </div>
             <div class="row">
@@ -323,14 +317,14 @@
                     <div class="team-member text-center">
                         <img src={% static "mylib/img/team/1.jpg" %}   class="img-responsive img-circle center-block" style="width:12em;height:12em" alt="" align="middle">
                         <h4>Ashish Kumar</h4>
-                        <p class="text-muted">Lead Developer</p>
+                        <p class="text-muted">Master Templar</p>
                     </div>
                 </div>
                 <div class="col-sm-6 text-center">
                     <div class="team-member">
                         <img src="{% static "mylib/img/team/2.jpg" %}" class="img-responsive img-circle center-block"  style="width:12em;height:12em" alt="">
                         <h4>Aniket Pandey</h4>
-                        <p class="text-muted">Lead Developer</p>
+                        <p class="text-muted">Master Assassin</p>
                     </div>
                 </div>
             </div>
