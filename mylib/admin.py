@@ -30,7 +30,7 @@ admin.site.register(IssueRequest, IssueAdmin)
 
 class NoteAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'notice')
-    list_filter = ('user', 'notice')
+    list_filter = ('user'.'notice')
 
 admin.site.register(Notification, NoteAdmin)
 
