@@ -32,4 +32,4 @@ See the [Django Documentation](https://docs.djangoproject.com/en/1.11/) for more
 
 
 
-*All rights reserved. Copyright to [Aniket](https://github.com/lordaniket06) and his friend [Ashish](https://github.com/aasis21)*
+*All rights reserved. Copyright © 2017,[Aniket](https://github.com/lordaniket06) and [Ashish](https://github.com/aasis21)*
