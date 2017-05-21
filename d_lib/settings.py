@@ -25,8 +25,11 @@ SECRET_KEY = '*#g27=-8k@p5lu+1zsp#qsb5@6j(3wy2dgcv*4_mf(1+prjere'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    'aasis21.pythonanywhere.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 # Application definition
 
@@ -139,6 +142,3 @@ MEDIA_ROOT =os.path.join(m_path,'media')
 
 MEDIA_URL='/media/'
 
-ALLOWED_HOSTS = [
-    'aasis21.pythonanywhere.com',
-    ]
