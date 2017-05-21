@@ -138,3 +138,7 @@ m_path=os.path.abspath(os.path.dirname(__file__))
 MEDIA_ROOT =os.path.join(m_path,'media')
 
 MEDIA_URL='/media/'
+
+ALLOWED_HOSTS = [
+    'aasis21.pythonanywhere.com',
+    ]
