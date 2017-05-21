@@ -21,6 +21,7 @@ urlpatterns =[
     url(r'^books/(?P<pk>\d+)/update/$',views.BookUpdate.as_view(),name='book_update'),
     url(r'^books/notifications/$',views.notifications,name='notifications'),
     url(r'^register/$',views.register_page,name='sign_in'),
+    url('^books/filter/$',views.book_filter,name='filter'),
 
 ]
 

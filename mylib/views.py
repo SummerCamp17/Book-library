@@ -6,9 +6,14 @@ from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.urls import reverse_lazy
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from .filters import BookFilter
 
 
 # Create your views here.
+def book_filter(request):
+    f = BookFilter(request.GET, queryset=Book.objects.all())
+    return render(request, 'book_filter.html', {'filter': f})
+
 
 def index(request):
     books = Book.objects.all()
@@ -25,7 +30,10 @@ def notifications(request):
 def books(request):
     books=Book.objects.all()
     all_books=books[::-1]
-    return render(request,'books.html',context={'all_books':all_books})
+    f = BookFilter(request.GET, queryset=books)
+    if request.method == 'GET':
+        all_books=f.qs
+    return render(request,'books.html', context={'all_books':all_books,'filter': f})
 
 def detail(request,pk):
     book=Book.objects.get(pk=pk)
