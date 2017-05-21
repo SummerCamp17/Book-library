@@ -6,9 +6,14 @@ from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.urls import reverse_lazy
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from .filters import BookFilter
 
 
 # Create your views here.
+def book_filter(request):
+    f = BookFilter(request.GET, queryset=Book.objects.all())
+    return render(request, 'book_filter.html', {'filter': f})
+
 
 def index(request):
     books = Book.objects.all()
