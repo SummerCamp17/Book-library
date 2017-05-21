@@ -30,7 +30,10 @@ def notifications(request):
 def books(request):
     books=Book.objects.all()
     all_books=books[::-1]
-    return render(request,'books.html',context={'all_books':all_books})
+    f = BookFilter(request.GET, queryset=books)
+    if request.method == 'GET':
+        all_books=f.qs
+    return render(request,'books.html', context={'all_books':all_books,'filter': f})
 
 def detail(request,pk):
     book=Book.objects.get(pk=pk)
